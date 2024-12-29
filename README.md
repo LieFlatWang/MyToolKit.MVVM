@@ -34,7 +34,7 @@ private void Method(string str)
 ## ObservableObject的使用
 
 ```csharp
-public class MainWindowViewMode : ObservableObject
+public class Model : ObservableObject
 {
     private string _str;
     public string Str
@@ -48,4 +48,29 @@ public class MainWindowViewMode : ObservableObject
     }
 }
 ```
+
+## ViewModelBase的使用
+
+``` c#
+public class IndexControlViewModel : ViewModelBase
+{
+    public IndexControlViewModel()
+    {
+        AppName = "My Tool";
+    }
+    
+    private string? _appName;
+    public string? AppName
+    {
+        get => _appName;
+        set
+        {
+            _appName = value;
+            OnPropertyChanged();
+        }
+    }
+}
+```
+
+
 
