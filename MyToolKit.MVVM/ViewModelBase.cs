@@ -1,27 +1,22 @@
-﻿namespace MyToolKit.MVVM;
+﻿using Study.Client.Common;
 
-public class ViewModelBase : ObservableObject
+namespace MyToolKit.MVVM;
+
+public class ViewModelBase<T> : ObservableObject where T : class
 {
-    private static ViewModelBase? _instance;
-    private static readonly object Lock = new object();
 
-    public static ViewModelBase Instance
+    private static T _instance;
+
+    public static T Instance
     {
         get
         {
-            // First check outside of the lock
             if (_instance == null)
             {
-                lock (Lock)
-                {
-                    // Second check inside the lock to ensure only one instance is created
-                    if (_instance == null)
-                    {
-                        _instance = new ViewModelBase();
-                    }
-                }
+                _instance = ServiceLocator.GetService<T>();
             }
             return _instance;
         }
     }
+
 }
